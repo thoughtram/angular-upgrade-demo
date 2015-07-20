@@ -1,12 +1,17 @@
 var app = angular.module('SampleApp', []);
 
 app.controller('PostsController', function (PostsService, UsersService, PhotosService) {
-  this.posts = PostsService.getPosts();
+  var that = this;
+
+  PostsService.getPosts().then(function (posts) {
+    that.posts = posts;
+  });
+
   this.getUserByPost = UsersService.getUserByPost;
   this.getPhotoByPost = PhotosService.getPhotoByPost;
 });
 
-app.service('PostsService', function () {
+app.service('PostsService', function ($q) {
   var posts = [
     {
       "userId": 1,
@@ -29,7 +34,9 @@ app.service('PostsService', function () {
   ];
 
   this.getPosts = function () {
-    return posts;
+    return $q(function (resolve) {
+      resolve(posts);
+    });
   };
 });
 

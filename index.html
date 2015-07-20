@@ -5,7 +5,16 @@
     <title>Sample App</title>
   </head>
   <body ng-app="SampleApp">
-    {{ 1 + 1 }}
+    <h1>Sample App</h1>
+    <div ng-controller="PostsController as ctrl">
+      <h2>Posts</h2>
+      <ul>
+        <li ng-repeat="post in ctrl.posts track by post.id">
+          <h3>{{post.title}}</h3>
+          <p>{{post.body}}</p>
+        </li>
+      </ul>
+    </div>
     <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
     <script src="app.js"></script>
   </body>

@@ -3,14 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title>Sample App</title>
+    <style>
+      [ng-cloak] {
+        display: none;
+      }
+    </style>
   </head>
-  <body ng-app="SampleApp">
+  <body ng-app="SampleApp" ng-cloak>
     <h1>Sample App</h1>
     <div ng-controller="PostsController as ctrl">
       <h2>Posts</h2>
       <ul>
         <li ng-repeat="post in ctrl.posts track by post.id">
           <h3>{{post.title}}</h3>
+          <img ng-src="{{ctrl.getPhotoByPost(post).url}}">
+          <p><small>By {{ctrl.getUserByPost(post).name}}</small></p>
           <p>{{post.body}}</p>
         </li>
       </ul>

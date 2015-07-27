@@ -1,0 +1,26 @@
+<h2>{{ctrl.country.name}} ({{ctrl.country.nativeName}})</h2>
+
+<dl>
+  <dt>Region:</dt>
+  <dd>{{ctrl.country.region}}</dd>
+  <dt>Subregion:</dt>
+  <dd>{{ctrl.country.subregion}}</dd>
+  <dt>Population:</dt>
+  <dd>{{ctrl.country.population}}</dd>
+  <dt>Captial:</dt>
+  <dd>{{ctrl.country.capital}}</dd>
+  <dt>Currencies:</dt>
+  <dd>
+    <ul>
+      <li ng-repeat="currency in ctrl.country.currencies">{{currency}}</li>
+    </ul>
+  </dd>
+  <dt>Timezones:</dt>
+  <dd>
+    <ul>
+      <li ng-repeat="timezone in ctrl.country.timezones">{{timezone}}</li>
+    </ul>
+  </dd>
+</dl>
+
+<p><a href="#/">Back to list</a></p>

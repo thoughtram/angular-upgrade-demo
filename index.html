@@ -11,16 +11,9 @@
   </head>
   <body ng-app="SampleApp" ng-cloak>
     <h1>Sample App</h1>
-    <div ng-controller="CountriesController as ctrl">
-      <h2>Countries</h2>
-      <p ng-if="!ctrl.countries">Loading...</p>
-      <ul ng-if="ctrl.countries">
-        <li ng-repeat="country in ctrl.countries track by $index">
-          <h3>{{country.name}} ({{country.nativeName}})</h3>
-        </li>
-      </ul>
-    </div>
+    <ng-view></ng-view>
     <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="https://code.angularjs.org/1.4.3/angular-route.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

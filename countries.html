@@ -1,0 +1,7 @@
+<h2>Countries</h2>
+<p ng-if="!ctrl.countries">Loading...</p>
+<ul ng-if="ctrl.countries">
+  <li ng-repeat="country in ctrl.countries track by $index">
+    <a ng-href="#/{{country.name}}"><h3>{{country.name}} ({{country.nativeName}})</h3></a>
+  </li>
+</ul>

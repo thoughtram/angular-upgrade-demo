@@ -11,14 +11,12 @@
   </head>
   <body ng-app="SampleApp" ng-cloak>
     <h1>Sample App</h1>
-    <div ng-controller="PostsController as ctrl">
-      <h2>Posts</h2>
-      <ul>
-        <li ng-repeat="post in ctrl.posts track by post.id">
-          <h3>{{post.title}}</h3>
-          <img ng-src="{{ctrl.getPhotoByPost(post).url}}">
-          <p><small>By {{ctrl.getUserByPost(post).name}}</small></p>
-          <p>{{post.body}}</p>
+    <div ng-controller="CountriesController as ctrl">
+      <h2>Countries</h2>
+      <p ng-if="!ctrl.countries">Loading...</p>
+      <ul ng-if="ctrl.countries">
+        <li ng-repeat="country in ctrl.countries track by $index">
+          <h3>{{country.name}} ({{country.nativeName}})</h3>
         </li>
       </ul>
     </div>

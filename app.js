@@ -4,11 +4,21 @@ app.config(function ($routeProvider) {
   $routeProvider
     .when('/', {
       controller: 'CountriesController as ctrl',
-      templateUrl: 'countries.html'
+      templateUrl: 'countries.html',
+      resolve: {
+        countries: function (CountriesService) {
+          return CountriesService.getCountries();
+        }
+      }
     })
     .when('/:country', {
       controller: 'CountryController as ctrl',
-      templateUrl: 'country.html'
+      templateUrl: 'country.html',
+      resolve: {
+        country: function (CountriesService, $route) {
+          return CountriesService.getCountry($route.current.params.country);
+        }
+      }
     })
     .otherwise('/');
 });
@@ -17,13 +27,12 @@ app.value('config', {
   apiUrl: 'http://restcountries.eu/rest/v1'
 });
 
-app.controller('CountriesController', function (CountriesService) {
-  var that = this;
+app.controller('CountriesController', function (countries) {
+  this.countries = countries;
+});
 
-  CountriesService.getCountries().then(function (countries) {
-    console.dir(countries);
-    that.countries = countries;
-  });
+app.controller('CountryController', function (country) {
+  this.country = country;
 });
 
 app.service('CountriesService', function ($http, config, $q) {
@@ -47,12 +56,4 @@ app.service('CountriesService', function ($http, config, $q) {
       return response.data[0];
     });
   };
-});
-
-app.controller('CountryController', function (CountriesService, $routeParams) {
-  var that = this;
-  CountriesService.getCountry($routeParams.country).then(function (country) {
-    console.dir(country);
-    that.country = country;
-  });
 });

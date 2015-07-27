@@ -27,8 +27,9 @@ app.value('config', {
   apiUrl: 'http://restcountries.eu/rest/v1'
 });
 
-app.controller('CountriesController', function (countries) {
+app.controller('CountriesController', function (countries, $routeParams) {
   this.countries = countries;
+  this.nameFilter = $routeParams.filter;
 });
 
 app.controller('CountryController', function (country) {

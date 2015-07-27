@@ -1,6 +1,7 @@
 <h2>Countries</h2>
+<input ng-model="ctrl.nameFilter">
 <ul>
-  <li ng-repeat="country in ctrl.countries track by $index">
+  <li ng-repeat="country in ctrl.countries | filter:ctrl.nameFilter track by $index">
     <a ng-href="#/{{country.name}}"><h3>{{country.name}} ({{country.nativeName}})</h3></a>
   </li>
 </ul>

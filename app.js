@@ -41,7 +41,7 @@ app.service('CountriesService', function ($http, config, $q) {
 
   this.getCountries = function () {
     return $q(function (resolve, reject) {
-      if (countries.length > 0) {
+      if (countries.length) {
         resolve(countries);
       } else {
         resolve($http.get(config.apiUrl + '/all').then(function (response) {
@@ -57,4 +57,11 @@ app.service('CountriesService', function ($http, config, $q) {
       return response.data[0];
     });
   };
+});
+
+app.directive('countryDescription', function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'country-description.html',
+  }
 });

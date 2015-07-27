@@ -16,7 +16,15 @@ app.config(function ($routeProvider) {
       templateUrl: 'country.html',
       resolve: {
         country: function (CountriesService, $route) {
-          return CountriesService.getCountry($route.current.params.country);
+          return CountriesService.getCountry($route.current.params.country).then(function (country) {
+            return CountriesService.getBorderCountries(country).then(function (countries) {
+              country.borderCountries = countries;
+              if (!country.timezones) {
+                country.timezones = [];
+              }
+              return country;
+            });
+          });
         }
       }
     })
@@ -39,6 +47,8 @@ app.controller('CountryController', function (country) {
 app.service('CountriesService', function ($http, config, $q) {
   var countries = [];
 
+  var that = this;
+
   this.getCountries = function () {
     return $q(function (resolve, reject) {
       if (countries.length) {
@@ -57,11 +67,49 @@ app.service('CountriesService', function ($http, config, $q) {
       return response.data[0];
     });
   };
+
+  this.getCountryByCountryCode = function (code) {
+    return $http.get(config.apiUrl + '/alpha/' + code).then(function (response) {
+      return response.data;
+    });
+  };
+
+  this.getBorderCountries = function (country) {
+    countryPromises = country.borders.map(function(countryCode) {
+      return that.getCountryByCountryCode(countryCode);
+    });
+    return $q.all(countryPromises);
+  };
 });
 
 app.directive('countryDescription', function () {
   return {
     restrict: 'E',
     templateUrl: 'country-description.html',
+    scope: {},
+    bindToController: {
+      country: '='
+    },
+    controller: function () {},
+    controllerAs: 'ctrl'
+  }
+});
+
+app.directive('countryCard', function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'country-card.html',
+    scope: {},
+    bindToController: {
+      country: '='
+    },
+    controller: function () {},
+    controllerAs: 'ctrl'
+  }
+});
+
+app.filter('join', function () {
+  return function (arr) {
+    return arr.join(',');
   }
 });

@@ -1,7 +1,3 @@
-<h2>Countries</h2>
-<input ng-model="ctrl.nameFilter">
-<ul>
-  <li ng-repeat="country in ctrl.countries | filter:ctrl.nameFilter track by $index">
-    <a ng-href="#/{{country.name}}"><h3>{{country.name}} ({{country.nativeName}})</h3></a>
-  </li>
-</ul>
+<input class="mdl-textfield__input" placeholder="Search" ng-model="ctrl.nameFilter">
+
+<country-card ng-repeat="country in ctrl.countries | filter:ctrl.nameFilter track by $index" country="country"></country-card>

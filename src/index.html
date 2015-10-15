@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Countries App</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- build:css -->
+    <!-- endbuild -->
+  </head>
+  <body ng-app="CountriesApp" ng-cloak ng-strict-di>
+    <div class="mdl-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Countries App</span>
+        </div>
+      </header>
+      <main class="mdl-layout__content">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--12-col mdl-cell--6-col-desktop">
+            <ng-view></ng-view>
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- build:js -->
+    <!-- endbuild -->
+  </body>
+</html>

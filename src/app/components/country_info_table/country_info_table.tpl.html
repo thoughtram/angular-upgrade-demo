@@ -1,0 +1,29 @@
+<table class="mdl-data-table mdl-data-table--selectable mdl-shadow--2dp">
+  <tbody>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric"><strong>Region</strong>:</td>
+      <td>{{ctrl.country.region}}</td>
+    </tr>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric"><strong>Subregion</strong>:</td>
+      <td>{{ctrl.country.subregion}}</td>
+    </tr>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric"><strong>Population</strong>:</td>
+      <td>{{ctrl.country.population}}</td>
+    </tr>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric"><strong>Captial</strong>:</td>
+      <td>{{ctrl.country.capital}}</td>
+    </tr>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric"><strong>Currencies</strong>:</td>
+      <td>{{ctrl.country.currencies | join }}</td>
+    </tr>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric"><strong>Timezones</strong>:</td>
+      <td>{{ (ctrl.country.timezones | join) || 'Not available'}}</td>
+    </tr>
+  </tbody>
+</table>
+

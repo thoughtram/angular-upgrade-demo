@@ -1,0 +1,12 @@
+<div class="mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">{{ctrl.country.name}} ({{ctrl.country.nativeName}})</h2>
+  </div>
+  <div class="mdl-card__supporting-text">
+    <p>{{ctrl.country.name}} is a country in {{ctrl.country.subregion}}. It has a population of {{ctrl.country.population}} people and adjoins {{ctrl.country.borders.length}} border countries.</p>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a ng-href="#/country/{{ctrl.country.name}}" class="mdl-button mdl-button--colored">Learn more</a>
+  </div>
+</div>
+

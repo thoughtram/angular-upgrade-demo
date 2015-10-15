@@ -1,0 +1,25 @@
+<div class="mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">{{ctrl.country.name}} ({{ctrl.country.nativeName}})</h2>
+  </div>
+  <div class="mdl-card__supporting-text">
+    <p>{{ctrl.country.name}} is a country in {{ctrl.country.subregion}}. It has a population of {{ctrl.country.population}} people and adjoins {{ctrl.country.borders.length}} border countries.</p>
+    <p>Please find more information here:</p>
+
+    <country-info-table country="ctrl.country"></country-info-table>
+
+    <h6>Border Countries</h6>
+    <div ng-if="ctrl.country.borderCountries.length">
+      <p>Here are the border countries of {{ctrl.country.name}}:</p>
+      <ul>
+        <li ng-repeat="country in ctrl.country.borderCountries">
+          <a ng-href="#/country/{{country.name}}">{{country.name}}</a>
+        </li>
+      </ul>
+    </div>
+    <p ng-if="!ctrl.country.borderCountries.length">{{ctrl.country.name}} doesn't have any border countries.</p>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a ng-href="#/" class="mdl-button mdl-button--colored">&larr; Back to list</a>
+  </div>
+</div>

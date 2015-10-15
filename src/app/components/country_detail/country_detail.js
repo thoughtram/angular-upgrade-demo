@@ -1,12 +1,19 @@
+import * as ngRoute from 'angular-route';
+import {CountryDetailCardModule} from '../country_detail_card/country_detail_card';
+import {CountryServiceModule} from '../../common/country_service';
+
+import './country_detail.tpl.html';
+
 class CountryController {
   constructor(country) {
     this.country = country;
   }
 }
-angular.module('CountryDetail', [
-  'CountryDetailCard',
-  'CountryService',
-  'ngRoute'
+export let CountryDetailModule = angular.module('CountryDetail', [
+  CountryDetailCardModule.name,
+  CountryServiceModule.name,
+  'templates',
+  ngRoute.default
 ])
 
 .config(($routeProvider) => {

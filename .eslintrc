@@ -1,4 +1,7 @@
 {
+    "ecmaFeatures": {
+      "modules": true
+    },
     "rules": {
         "indent": [
             2,

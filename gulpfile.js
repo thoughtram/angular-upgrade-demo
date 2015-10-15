@@ -1,11 +1,16 @@
 var gulp = require('gulp');
+var browserify = require('browserify');
+var babelify = require('babelify');
 var path = require('path');
 
 var vinylPaths = require('vinyl-paths');
+var source = require('vinyl-source-stream');
 var del = require('del');
 var serve = require('browser-sync');
 var runSequence = require('run-sequence');
 var glob = require('glob');
+var ngAnnotatify = require('browserify-ngannotate');
+var ngHtml2js = require('browserify-ng-html2js');
 
 var eslint = require('gulp-eslint');
 var uglify = require('gulp-uglify');
@@ -38,10 +43,7 @@ var paths = {
     css: [
       'node_modules/material-design-lite/material.css'
     ],
-    js: [
-      'node_modules/angular/angular.js',
-      'node_modules/angular-route/angular-route.js'
-    ]
+    js: []
   }
 };
 
@@ -79,10 +81,11 @@ function comparer(file1, file2) {
   return 0;
 }
 
+
 gulp.task('build', function (cb) {
   runSequence(
     'clean',
-    ['data', 'html2js','scripts', 'scripts:vendor', 'styles', 'styles:vendor'],
+    ['data', 'eslint', 'scripts','styles', 'styles:vendor'],
     'html',
     cb
   );
@@ -109,15 +112,29 @@ gulp.task('clean:dist:app', function () {
     .pipe(vinylPaths(del));
 });
 
-gulp.task('scripts', function () {
-  return gulp.src([paths.js, '!' + paths.spec])
+gulp.task('eslint', function () {
+  return gulp.src([paths.js])
     .pipe(eslint({
       configFile: path.join(__dirname, ESLINT_FILE)
     }))
-    .pipe(eslint.formatEach('stylish'))
-    .pipe(babel())
-    .pipe(ngAnnotate())
-    .pipe(gulp.dest(dist));
+    .pipe(eslint.formatEach('stylish'));
+})
+
+gulp.task('scripts', function () {
+  return browserify({
+    entries: './src/app/app.js',
+    debug: true
+  })
+  .transform(ngHtml2js({
+    module: 'templates',
+    extension: 'html',
+    requireAngular: true
+  }))
+  .transform(babelify)
+  .transform(ngAnnotatify)
+  .bundle()
+  .pipe(source('app.js'))
+  .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('scripts:prod', function () {
@@ -163,17 +180,6 @@ gulp.task('html', function () {
     .pipe(gulp.dest(dist));
 });
 
-gulp.task('html2js', function () {
-  return gulp.src(paths.tpls)
-    .pipe(html2js({
-      moduleName: 'templateCache',
-      rename: function (templateUrl, templateFile) {
-        return path.basename(templateUrl);
-      }
-    }))
-    .pipe(gulp.dest(dist))
-});
-
 gulp.task('serve', ['build'], function () {
   serve({
     port: process.env.PORT || 3000,
@@ -189,7 +195,6 @@ gulp.task('serve', ['build'], function () {
   });
 
   gulp.watch(paths.html, ['html', reload]);
-  gulp.watch(paths.tpls, ['html2js', reload]);
   gulp.watch(paths.css, ['styles', reload]);
   gulp.watch(paths.js, ['scripts', reload]);
 });

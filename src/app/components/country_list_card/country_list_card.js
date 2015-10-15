@@ -1,4 +1,6 @@
-angular.module('CountryListCard', [])
+import './country_list_card.tpl.html';
+
+export let CountryListCard = angular.module('CountryListCard', ['templates'])
 
 .directive('countryListCard', () => {
   return {

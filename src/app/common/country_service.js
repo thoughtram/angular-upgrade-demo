@@ -35,6 +35,6 @@ class CountryService {
   }
 }
 
-angular.module('CountryService', [])
+export let CountryServiceModule = angular.module('CountryService', [])
 
 .service('CountryService', CountryService);

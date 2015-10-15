@@ -30,6 +30,7 @@
     "gulp-typescript": "^2.9.2",
     "gulp-uglify": "^1.2.0",
     "ng-annotate": "^1.0.2",
+    "reflect-metadata": "^0.1.2",
     "run-sequence": "^1.1.2",
     "typescript": "^1.6.2",
     "vinyl-paths": "^1.0.0",
@@ -38,6 +39,7 @@
   "dependencies": {
     "angular": "^1.4.6",
     "angular-route": "^1.4.6",
+    "angular2": "2.0.0-alpha.42",
     "material-design-lite": "^1.0.4-2"
   }
 }

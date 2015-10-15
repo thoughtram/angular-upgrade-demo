@@ -1,5 +1,10 @@
-class CountryService {
+/// <reference path='../../../dts/angular/angular.d.ts' />
 
+class CountryService {
+  countries: any;
+  $http: ng.IHttpService;
+  config: any;
+  $q: ng.IQService;
   constructor($http, config, $q) {
     this.countries = [];
     this.$http = $http;

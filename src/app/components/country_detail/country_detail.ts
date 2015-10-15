@@ -5,6 +5,7 @@ import {CountryServiceModule} from '../../common/country_service';
 import './country_detail.tpl.html';
 
 class CountryController {
+  country: any;
   constructor(country) {
     this.country = country;
   }

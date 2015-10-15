@@ -6,6 +6,7 @@ import './countries_list.tpl.html';
 
 /*@ngInject*/
 class CountriesController {
+  countries: Array<any>;
   constructor(countries) {
     this.countries = countries;
   }

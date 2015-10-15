@@ -14,6 +14,7 @@ var ngAnnotate = require('gulp-ng-annotate');
 var htmlReplace = require('gulp-html-replace');
 var html2js = require('gulp-ng-html2js');
 var minifyCss = require('gulp-minify-css');
+var babel = require('gulp-babel');
 
 var ESLINT_FILE = '.eslintrc';
 var root = 'src';
@@ -114,6 +115,7 @@ gulp.task('scripts', function () {
       configFile: path.join(__dirname, ESLINT_FILE)
     }))
     .pipe(eslint.formatEach('stylish'))
+    .pipe(babel())
     .pipe(ngAnnotate())
     .pipe(gulp.dest(dist));
 });
@@ -121,7 +123,6 @@ gulp.task('scripts', function () {
 gulp.task('scripts:prod', function () {
   return gulp.src(path.join(dist, patterns.js))
     .pipe(concat('app.min.js'))
-    .pipe(ngAnnotate())
     .pipe(uglify())
     .pipe(gulp.dest(dist));
 });

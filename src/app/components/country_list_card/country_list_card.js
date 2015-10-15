@@ -1,6 +1,6 @@
 angular.module('CountryListCard', [])
 
-.directive('countryListCard', function () {
+.directive('countryListCard', () => {
   return {
     restrict: 'E',
     templateUrl: 'country_list_card.tpl.html',
@@ -8,7 +8,7 @@ angular.module('CountryListCard', [])
     bindToController: {
       country: '='
     },
-    controller: function () {},
+    controller: () => {},
     controllerAs: 'ctrl'
   };
 });

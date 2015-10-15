@@ -1,39 +1,40 @@
+class CountryService {
+
+  constructor($http, config, $q) {
+    this.countries = [];
+    this.$http = $http;
+    this.config = config;
+    this.$q = $q;
+  }
+
+  getCountries() {
+    return this.countries.length ? this.$q.resolve(this.countries) :
+    this.$http.get(this.config.apiUrl).then((response) => {
+      this.countries = response.data.items;
+      return this.countries;
+    });
+  }
+
+  getCountry(name) {
+    return this
+            .getCountries()
+            .then(countries => countries.find(country => country.name === name));
+  }
+
+  getCountryByCountryCode(code) {
+    return this
+            .getCountries()
+            .then(countries => countries.find(country => country.alpha3Code === code));
+  }
+
+  getBorderCountries(country) {
+    var countryPromises = country.borders.map((countryCode) => {
+      return this.getCountryByCountryCode(countryCode);
+    });
+    return this.$q.all(countryPromises);
+  }
+}
+
 angular.module('CountryService', [])
 
-.service('CountryService', function ($http, config, $q) {
-  var countries = [];
-
-  var that = this;
-
-  this.getCountries = function () {
-    return countries.length ? $q.resolve(countries) :
-      $http.get(config.apiUrl).then(function (response) {
-        return response.data.items;
-      });
-  };
-
-  this.getCountry = function (name) {
-    return this.getCountries()
-              .then(function (countries) {
-                return countries.find(function (country){
-                  return country.name === name;
-                });
-              });
-  };
-
-  this.getCountryByCountryCode = function (code) {
-    return this.getCountries()
-              .then(function (countries) {
-                return countries.find(function (country){
-                  return country.alpha3Code === code;
-                });
-              });
-  };
-
-  this.getBorderCountries = function (country) {
-    var countryPromises = country.borders.map(function(countryCode) {
-      return that.getCountryByCountryCode(countryCode);
-    });
-    return $q.all(countryPromises);
-  };
-});
+.service('CountryService', CountryService);

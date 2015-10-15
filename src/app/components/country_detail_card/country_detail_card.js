@@ -2,7 +2,7 @@ angular.module('CountryDetailCard', [
   'CountryInfoTable'
 ])
 
-.directive('countryDetailCard', function () {
+.directive('countryDetailCard', () => {
   return {
     restrict: 'E',
     templateUrl: 'country_detail_card.tpl.html',
@@ -10,7 +10,7 @@ angular.module('CountryDetailCard', [
     bindToController: {
       country: '='
     },
-    controller: function () {},
+    controller: () => {},
     controllerAs: 'ctrl'
   };
 });

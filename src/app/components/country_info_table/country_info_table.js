@@ -1,6 +1,6 @@
 angular.module('CountryInfoTable', ['JoinFilter'])
 
-.directive('countryInfoTable', function () {
+.directive('countryInfoTable', () => {
   return {
     restrict: 'E',
     templateUrl: 'country_info_table.tpl.html',
@@ -8,7 +8,7 @@ angular.module('CountryInfoTable', ['JoinFilter'])
     bindToController: {
       country: '='
     },
-    controller: function () {},
+    controller: () => {},
     controllerAs: 'ctrl'
   };
 });

@@ -5,7 +5,7 @@ angular.module('CountriesApp', [
   'templateCache'
 ])
 
-.config(function ($routeProvider) {
+.config(($routeProvider) => {
   $routeProvider.otherwise('/countries');
 })
 

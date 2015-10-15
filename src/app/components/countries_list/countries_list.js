@@ -1,21 +1,25 @@
+class CountriesController {
+  constructor(countries) {
+    this.countries = countries;
+  }
+}
+
 angular.module('CountriesList', [
   'CountryListCard',
   'CountryService',
   'ngRoute'
 ])
 
-.config(function ($routeProvider) {
+.config(($routeProvider) => {
   $routeProvider.when('/countries', {
     controller: 'CountriesListController as ctrl',
     templateUrl: 'countries_list.tpl.html',
     resolve: {
-      countries: function (CountryService) {
+      countries: (CountryService) => {
         return CountryService.getCountries();
       }
     }
   });
 })
 
-.controller('CountriesListController', function (countries) {
-  this.countries = countries;
-});
+.controller('CountriesListController',  CountriesController);

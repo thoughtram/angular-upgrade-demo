@@ -13,7 +13,7 @@ export let CountryDetailModule = angular.module('CountryDetail', [
   CountryDetailCardModule.name,
   CountryServiceModule.name,
   'templates',
-  ngRoute.default
+  ngRoute
 ])
 
 .config(($routeProvider) => {

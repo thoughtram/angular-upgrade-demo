@@ -1,0 +1,30 @@
+{
+    "version": "1.6.0",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "sourceMap": true
+    },
+    "files": [
+        "src/app/app.ts",
+        "src/app/common/country_service.ts",
+        "src/app/common/join_filter.ts",
+        "src/app/components/countries_list/countries_list.ts",
+        "src/app/components/country_detail_card/country_detail_card.ts",
+        "src/app/components/country_detail/country_detail.ts",
+        "src/app/components/country_info_table/country_info_table.ts",
+        "src/app/components/country_list_card/country_list_card.ts"
+    ],
+    "filesGlob": [
+        "./src/**/*.ts",
+        "./tsd_typings/**/*.d.ts"
+    ],
+    "compileOnSave": false,
+    "exclude": []
+}

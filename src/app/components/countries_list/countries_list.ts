@@ -14,7 +14,7 @@ class CountriesController {
 export let CountriesListModule = angular.module('CountriesList', [
   CountryListCard.name,
   CountryServiceModule.name,
-  ngRoute.default,
+  ngRoute,
   'templates'
 ])
 /*@ngInject*/

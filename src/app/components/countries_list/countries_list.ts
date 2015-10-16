@@ -1,8 +1,25 @@
 import {CountryListCard} from '../country_list_card/country_list_card';
 import {CountryServiceModule} from '../../common/country_service';
 import * as ngRoute from 'angular-route';
+import {Component, NgFor} from 'angular2/angular2';
+import {adapter} from '../../adapter';
 
-import './countries_list.tpl.html';
+@Component({
+  selector: 'countries-list',
+  inputs: ['countries'],
+  template: `
+    <country-list-card 
+      *ng-for="#country of countries"
+      [country]="country">
+    </country-list-card>
+  `,
+  directives: [
+    adapter.upgradeNg1Component('countryListCard'),
+    NgFor
+  ]
+})
+export class CountriesList {
+}
 
 /*@ngInject*/
 class CountriesController {
@@ -15,14 +32,13 @@ class CountriesController {
 export let CountriesListModule = angular.module('CountriesList', [
   CountryListCard.name,
   CountryServiceModule.name,
-  ngRoute,
-  'templates'
+  ngRoute
 ])
 /*@ngInject*/
 .config(($routeProvider) => {
   $routeProvider.when('/countries', {
     controller: 'CountriesListController as ctrl',
-    templateUrl: 'countries_list.tpl.html',
+    template: '<countries-list [countries]="ctrl.countries"></countries-list>',
     resolve: {
       /*@ngInject*/
       countries: (CountryService) => {

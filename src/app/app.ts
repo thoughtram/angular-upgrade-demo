@@ -6,6 +6,7 @@ import 'reflect-metadata';
 import {CountriesListModule} from './components/countries_list/countries_list';
 import {CountryDetailModule} from './components/country_detail/country_detail';
 import {CountryInfoTable} from './components/country_info_table/country_info_table';
+import {CountriesList} from './components/countries_list/countries_list';
 import {adapter} from './adapter';
 
 var CountriesApp = angular.module('CountriesApp', [
@@ -24,5 +25,6 @@ CountriesApp.value('config', {
 
 CountriesApp
 .directive('countryInfoTable', adapter.downgradeNg2Component(CountryInfoTable))
+.directive('countriesList', adapter.downgradeNg2Component(CountriesList));
 
 adapter.bootstrap(document.body, ['CountriesApp']);

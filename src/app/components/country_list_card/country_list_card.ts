@@ -6,10 +6,10 @@ export let CountryListCard = angular.module('CountryListCard', ['templates'])
   return {
     restrict: 'E',
     templateUrl: 'country_list_card.tpl.html',
-    scope: {},
-    bindToController: {
+    scope: {
       country: '='
     },
+    bindToController: true,
     controller: () => {},
     controllerAs: 'ctrl'
   };

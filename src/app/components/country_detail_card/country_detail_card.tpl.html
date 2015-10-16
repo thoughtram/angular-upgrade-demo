@@ -6,7 +6,7 @@
     <p>{{ctrl.country.name}} is a country in {{ctrl.country.subregion}}. It has a population of {{ctrl.country.population}} people and adjoins {{ctrl.country.borders.length}} border countries.</p>
     <p>Please find more information here:</p>
 
-    <country-info-table country="ctrl.country"></country-info-table>
+    <country-info-table [country]="ctrl.country"></country-info-table>
 
     <h6>Border Countries</h6>
     <div ng-if="ctrl.country.borderCountries.length">

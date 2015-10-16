@@ -5,6 +5,7 @@ import * as ngRoute from 'angular-route';
 import 'reflect-metadata';
 import {CountriesListModule} from './components/countries_list/countries_list';
 import {CountryDetailModule} from './components/country_detail/country_detail';
+import {CountryInfoTable} from './components/country_info_table/country_info_table';
 import {adapter} from './adapter';
 
 var CountriesApp = angular.module('CountriesApp', [
@@ -20,5 +21,8 @@ CountriesApp.config(($routeProvider) => {
 CountriesApp.value('config', {
   apiUrl: 'data.json'
 });
+
+CountriesApp
+.directive('countryInfoTable', adapter.downgradeNg2Component(CountryInfoTable))
 
 adapter.bootstrap(document.body, ['CountriesApp']);

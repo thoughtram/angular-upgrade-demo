@@ -2,7 +2,6 @@ import {CountryListCard} from '../country_list_card/country_list_card';
 import {CountryServiceModule} from '../../common/country_service';
 import * as ngRoute from 'angular-route';
 import {Component, NgFor} from 'angular2/angular2';
-import {adapter} from '../../adapter';
 
 @Component({
   selector: 'countries-list',
@@ -14,7 +13,7 @@ import {adapter} from '../../adapter';
     </country-list-card>
   `,
   directives: [
-    adapter.upgradeNg1Component('countryListCard'),
+    CountryListCard,
     NgFor
   ]
 })
@@ -30,7 +29,6 @@ class CountriesController {
 }
 
 export let CountriesListModule = angular.module('CountriesList', [
-  CountryListCard.name,
   CountryServiceModule.name,
   ngRoute
 ])
